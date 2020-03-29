@@ -5,6 +5,12 @@ gulp 知识点记录+示例项目
 - gulp-test-babelplugin-transform-runtime 有babel的高级使用配置 （@babel/polyfill @babel/plugin-transform-runtime）
 - gulp-test-goods gulp前端自动化最佳构建实践&&Gulp流程控制
 
+环境依赖：
+
+```
+cnpm install --save-dev @babel/core @babel/preset-env browser-sync del gulp gulp-autoprefixer gulp-babel gulp-base64 gulp-changed gulp-clean-css gulp-concat gulp-css-spriter gulp-imagemin gulp-less gulp-notify gulp-rename gulp-rev gulp-rev-collector gulp-uglify
+```
+
 Gulp 前端项目构建最佳实践
 
 1. 建立站点文件
