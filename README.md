@@ -8,7 +8,32 @@ gulp 知识点记录+示例项目
 环境依赖：
 
 ```
-cnpm install --save-dev @babel/core @babel/preset-env browser-sync del gulp gulp-autoprefixer gulp-babel gulp-base64 gulp-changed gulp-clean-css gulp-concat gulp-css-spriter gulp-imagemin gulp-less gulp-notify gulp-rename gulp-rev gulp-rev-collector gulp-uglify
+cnpm install --save-dev @babel/core @babel/preset-env browser-sync del gulp gulp-autoprefixer gulp-babel gulp-base64 gulp-changed gulp-clean-css gulp-concat gulp-css-spriter gulp-imagemin gulp-less gulp-notify gulp-rename gulp-rev gulp-rev-collector gulp-uglify run-sequence
+```
+
+```
+var gulp = require("gulp"); // gulp原生插件
+var { series } = require("gulp");
+var less = require("gulp-less"); //编译less
+var concat = require("gulp-concat"); //合并文件（css、js）
+var cleanCss = require("gulp-clean-css"); //压缩css
+var autoprefixer = require("gulp-autoprefixer"); //自动添加浏览器前缀
+var del = require("del"); //删除文件
+var babel = require("gulp-babel"); //编译es6->es5
+var uglify = require("gulp-uglify"); //压缩js
+var rename = require("gulp-rename"); //重命名
+var imagemin = require("gulp-imagemin"); //图片压缩
+var spriter = require("gulp-css-spriter"); //精灵图
+var base64 = require("gulp-base64"); //base64图片
+var browserSync = require("browser-sync").create(); //服务器同步
+var reload = browserSync.reload;
+var changed = require("gulp-changed"); //文件修改过滤
+var rev = require("gulp-rev"); //版本控制
+var revCollector = require("gulp-rev-collector"); // 配合 gulp-rev 来一起使用
+var notify = require("gulp-notify"); //Gulp项目通知
+var runSequence = require("run-sequence"); //任务Task流程控制 task任务的先后顺序
+
+
 ```
 
 Gulp 前端项目构建最佳实践
@@ -49,6 +74,6 @@ Gulp 前端项目构建最佳实践
 ```
    4.1 路径统一修改&配置
    4.2 版本控制 ：gulp-rev和gulp-rev-collector
-   4.3 Gulp操作流程控制 gulp-notify
-   4.4 Gulp项目通知 gulp-notify
+   4.3 Gulp操作流程控制： run-sequence
+   4.4 Gulp项目通知： gulp-notify
 ```
