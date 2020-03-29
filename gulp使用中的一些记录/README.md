@@ -19,6 +19,17 @@ exports.default = asyncAwaitTask;
 gulp.src('./src/styles/*.{scss,css}');
 ```
 
+3. 排除某些文件
+
+src里面传入一个数组，!表示非。
+
+```
+gulp.src([
+      src.css + "*.css",
+      "!" + src.css + "all.min.css",
+      "!" + src.css + "all.css"
+    ])
+```
 
 
 
