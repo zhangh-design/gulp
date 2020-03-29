@@ -1,0 +1,8 @@
+body {
+  background-color: #ff0000;
+}
+.div1 {
+  width: 200px;
+  height: 200px;
+  border: 1px solid blue;
+}
