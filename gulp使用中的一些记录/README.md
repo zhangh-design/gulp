@@ -127,3 +127,24 @@ process.argv  [
   '--bbbb'
 ]
 ```
+
+6. `gulp` 指令传递参数
+
+
+```
+gulp bbb --123
+
+gulp.task('bbb', function(done){
+  console.info('aaaaaaaa ',process.argv);
+  done();
+})
+
+// 输出
+aaaaaaaa  [
+  'F:\\Program Files\\nodejs\\node.exe',
+  'F:\\Program Files\\nodejs\\node_global\\node_modules\\gulp-cli\\bin\\gulp.js',
+  'bbb',
+  '--123'
+]
+
+```
