@@ -92,3 +92,38 @@ gulp.task("css:dev", function(done) {
   done();
 });
 ```
+
+5. 用`package.json`通过`npm`指令调用`gulp`的任务，并且传递参数到`gulp`的任务中
+
+package.json
+
+```
+  "scripts": {
+    "build:theme": "gulp theme --bbbb"
+  }
+```
+
+`--`是固定的写法
+
+gulpfile.js
+
+```
+gulp.task("clear:theme", function(done) {
+  console.info('process.argv ',process.argv);
+  // process.argv 可以获取参数
+  // 删除lib目录下的所有文件，但保留lib文件夹
+  del([baseDir.theme + "theme-default/*.css"]);
+  done();
+});
+```
+
+console.info参数输出列表：
+
+```
+process.argv  [
+  'F:\\Program Files\\nodejs\\node.exe',
+  'E:\\vue-fast-element-ui\\build-fast-element-ui\\node_modules\\_gulp@4.0.2@gulp\\bin\\gulp.js',
+  'theme',
+  '--bbbb'
+]
+```
