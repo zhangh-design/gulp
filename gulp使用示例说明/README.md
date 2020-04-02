@@ -152,10 +152,10 @@ E:\gulp\vue-gulp\gulp-test>"node"  "C:\Users\nickname\AppData\Roaming\npm\\node_
 [11:19:36] Starting 'watch-file'...
 [11:19:36] Finished 'watch-file' after 10 ms
 [11:19:46] Starting 'task1'...
-index.html发生改变会调用task1任务        
+index.html发生改变会调用task1任务
 [11:19:46] Finished 'task1' after 2.37 ms
 [11:19:46] Starting 'task2'...
-index.html发生改变会调用task2任务        
+index.html发生改变会调用task2任务
 [11:19:46] Finished 'task2' after 1.26 ms
 ```
 
@@ -193,7 +193,7 @@ gulp.task("less", function() {
   return gulp
     .src("./src/less/*.less")
     .pipe(less()) // 调用 less 处理读取出来的 .less 结尾的文件流
-    .pipe(gulp.dest("./src/css/")); // 写入到 src/css/ 目录中 
+    .pipe(gulp.dest("./src/css/")); // 写入到 src/css/ 目录中
 });
 ```
 
@@ -999,8 +999,8 @@ gulp.task("rev-css", function() {
     .pipe(gulp.dest("./build/css/"))
     .pipe(rev.manifest())
     .pipe(gulp.dest('./rev/css/')); // 生成一个配置文件，写入到rev/css/目录
-    
-// 根据映射文件的配置更改我们index.html中的路径  
+
+// 根据映射文件的配置更改我们index.html中的路径
 gulp.task("rev-collector", function(done) {
   // 读取映射文件，去替换src目录下的所有.html文件
   // 这里的src中接收的是一个数组，表示读取和替换，这是 gulp-rev-collector 的语法
@@ -1009,8 +1009,8 @@ gulp.task("rev-collector", function(done) {
     .pipe(revCollector({}))
     .pipe(gulp.dest("./src/"));
   done();
-});    
-    
+});
+
 ```
 
 我们在写一个`gulp rev-collector`的任务专门去用于版本的替换操作。
@@ -1096,3 +1096,44 @@ gulp.task("reload", function(done) {
 ```
 
 `gulp-notify` 主要就是如何在浏览器实时同步的情况下进行一个通知的操作。
+
+#### 16. gulp-cheerio 以标签形式内联css、js到html页面
+
+安装：
+
+```
+cnpm install --save-dev gulp-cheerio
+```
+
+使用：
+
+```
+var gulp = require("gulp");
+var cheerio = require("gulp-cheerio"); // 以标签形式内联css、js到html页面
+
+**
+ * @desc html文件
+ */
+gulp.task("html:dev", function() {
+  var themeName = "theme-default"; // 默认主题库
+  if (process.argv[3]) {
+    themeName = process.argv[3].replace("--", "") + "/";
+  }
+  return gulp
+    .src("./public/index.html")
+    .pipe(
+      cheerio(function($) {
+        $("script").remove();
+        $("link").remove();
+        $("body").append('<script src="./fast-element-ui.common.js"></script>');
+        $("head").append(
+          '<link rel="stylesheet" href="./'+themeName+'index.css">'
+        );
+        $("head").append(
+          '<link rel="Shortcut Icon" href="./favicon.ico" type="image/x-icon" />'
+        );
+      })
+    )
+    .pipe(gulp.dest("./public/"));
+});
+```
